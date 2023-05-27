@@ -1,0 +1,12 @@
+body {
+  background-color: #1b1b1b;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+canvas {
+  background-color: #233a3d;
+  border-radius: 12px;
+  /* border: 4px solid aliceblue; */
+}
