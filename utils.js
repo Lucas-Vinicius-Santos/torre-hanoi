@@ -5,3 +5,7 @@ function getRandomSoftColor() {
   var color = 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
   return color;
 }
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

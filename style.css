@@ -1,12 +1,89 @@
-body {
-  background-color: #1b1b1b;
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  font-family: 'Play', sans-serif;
 }
 
-canvas {
-  background-color: #233a3d;
+body {
+  display: grid;
+  grid-template-rows: 100px 50px calc(100vh - 200px);
+  color: #f2f2f2;
+  min-height: 100vh;
+  place-items: center;
+  background-color: #1b1b1b;
+}
+
+#btnReload {
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #1b1b1b;
+  fill: #f2f2f2;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s ease-in;
+}
+
+#btnReload:hover {
+  transform: scale(1.1);
+}
+
+#form {
+  width: 100%;
+  max-width: 600px;
+  gap: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#qtdDisk {
+  outline: none;
+  font-weight: 700;
+  padding: 4px 8px;
+  width: 12em;
+}
+
+#btnStart {
+  padding: 4px 8px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: auto;
+  border-radius: 0.5em;
+  border-bottom: 0.25em solid #0f5177;
+  -moz-transition: 0.1s;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+#btnStart:hover {
+  /* color: #f2f2f2; */
+  background-color: #5ab3e7;
+  border-bottom-width: 0.1em;
+}
+
+#btnStart:disabled {
+  color: #f2f2f2;
+  cursor: not-allowed;
+  background-color: #0f5177;
+  border-bottom-width: 0;
+}
+
+#canvas {
   border-radius: 12px;
-  /* border: 4px solid aliceblue; */
+  background-color: #233a3d;
+}
+
+/* REMOVER SETAS INPUT NUMBER  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
 }

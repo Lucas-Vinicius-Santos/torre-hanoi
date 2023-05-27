@@ -50,7 +50,7 @@ class Disk extends Sprite {
   constructor(position, dimension, color, haste) {
     super(position, dimension, color);
 
-    this.acc = 2;
+    this.acc = 20;
     this.haste = haste;
   }
 
@@ -65,12 +65,14 @@ class Disk extends Sprite {
   }
 
   update() {
-    this.haste = hastes.find(
-      (haste) => haste.disks.filter((disk) => disk === this).length > 0
-    );
+    if (isNoAnimate) {
+      this.haste = hastes.find(
+        (haste) => haste.disks.filter((disk) => disk === this).length > 0
+      );
 
-    this.x = this.haste.x + this.haste.width / 2 - this.width / 2;
-    this.y = tower.y - this.height * (this.haste.disks.indexOf(this) + 1);
+      this.x = this.haste.x + this.haste.width / 2 - this.width / 2;
+      this.y = tower.y - this.height * (this.haste.disks.indexOf(this) + 1);
+    }
     this.draw();
   }
 }

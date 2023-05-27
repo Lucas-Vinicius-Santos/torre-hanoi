@@ -1,8 +1,17 @@
-window.addEventListener('click', () => {
-  solveHanoiTower();
-});
+async function start(event) {
+  event.preventDefault();
 
-setup();
+  isNoAnimate = !document.getElementById('cbAnimatedMov').checked;
+  qtdDisks = document.getElementById('qtdDisk').value;
+
+  qtdDisks = Number(qtdDisks) == 0 ? 2 : Number(qtdDisks);
+
+  btnStart.disabled = true;
+
+  setup();
+  await sleep(1000);
+  await solveHanoiTower();
+}
 
 async function updateTower() {
   ctx.fillStyle = '#233a3d';
@@ -12,14 +21,16 @@ async function updateTower() {
   hastes.forEach((haste) => haste.draw());
   disks.forEach((disk) => disk.update());
 
-  await sleep(100);
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  if (isNoAnimate) {
+    await sleep(100);
+  }
 }
 
 async function setup() {
+  await setupTower();
+  await setupHastes();
+  await setupDisks();
+
   hastes[0].disks = [...disks];
 
   ctx.fillStyle = '#233a3d';
@@ -45,9 +56,14 @@ function solveHanoiTower() {
 
     await recursiveHanoiSolve(qtdDisks - 1, hasteOrigin, hasteDest, hasteAux);
     hasteDest.disks.push(hasteOrigin.disks.pop());
-    await updateTower();
-    // hasteDest.disks[hasteDest.disks.length - 1].haste = hasteDest;
-    // await moveDiskForDest(hasteDest);
+
+    if (isNoAnimate) {
+      await updateTower();
+    } else {
+      hasteDest.disks[hasteDest.disks.length - 1].haste = hasteDest;
+      await moveDiskForDest(hasteDest);
+    }
+
     await recursiveHanoiSolve(qtdDisks - 1, hasteAux, hasteOrigin, hasteDest);
   }
 }
